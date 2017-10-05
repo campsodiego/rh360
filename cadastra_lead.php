@@ -1,9 +1,21 @@
 <?php 
 	require_once("connection.php");
 
+	// var_dump($_POST);
+	// $nome  = $_POST['nome'] . ' ' . $_POST['sobrenome']; 
+	if(isset($_POST['nome']) || $_POST['nome'] != '') {
+		$nome  = $_POST['nome'];
+	} else {
+		$nome  = $_POST['nome2'];
+	}
 	
-	$nome  = $_POST['nome'] . ' ' . $_POST['sobrenome']; 
-	$email = $_POST['email']; 
+	if(isset($_POST['email']) || $_POST['email'] != '') {
+		$email  = $_POST['email'];
+	} else {
+		$email  = $_POST['email2'];
+	}
+	
+	 
 	$ipaddress = $_POST['ipaddress'];
 	
 	$query = "INSERT INTO leads (nome, email, ipaddress, created_at, updated_at)"; 
@@ -19,7 +31,8 @@
 	mysql_close();
 	// echo "Inserido com sucesso";
 
-	// header("Location: http://localhost:8000/connection_test");
-
+	if(isset($_POST['nome']) || $_POST['nome'] != '') {
+		header("Location: https://quiz.tryinteract.com/#/59d3a7361a9c5a00125ba19c");
+	}
 
 ?>

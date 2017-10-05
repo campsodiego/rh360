@@ -8,7 +8,6 @@
     padding: 20px;
     margin-left: 0px;
 }
-
 #formlead{			
 	padding-top: 30px !important;
 }
@@ -26,13 +25,15 @@ input{
 }
 
 @media(min-width: 768px){
+    #for-banner{
+        margin-top: -35px;
+    }
+    #for-banner > button{
+        border-radius: 0 5px 5px 0 !important;
+    }
     #formlead > button{
     border-radius: 0 5px 5px 0 !important;
-    }
-}
-@media(min-width: 760px){
-    #formlead > button{
-    margin-left: 25px;
+    margin-bottom: -12px;
     }
 }
 
@@ -47,14 +48,14 @@ input{
 }
 /*titulo*/
 #titulo-principal{
-	font-size: 200%;
-	position: absolute;
-	top: 2%;
-    text-align: center;
-	width:100%;
+    font-size: 200%;
+    position: absolute;
+    top: 2%;
+    text-align: -webkit-center;
+    width:100%;
 }
 #logo{
-	color: #2a32a2;	
+	width: 5em !important;	
 }
 /*Banner principal*/
 
@@ -73,8 +74,17 @@ html, body{
     transform: translate(-50%, -50%);
     left: 50%;
     transition: .4s;
-    padding-top: 45px;
 }
+
+#for-banner > button{
+    margin-bottom: -20px;
+    margin-left:-8px;
+    height: 2.75em;
+    background-color:rgb(70, 204, 110);
+    color:white !important;
+}
+
+
 .data-postagem{
     color: black;
 }
