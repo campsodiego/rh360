@@ -1,12 +1,34 @@
 <?php 
-	if(isset($_POST['nome']) && isset($_POST['email'])) {
+	if(isset($_POST['nome']) && isset($_POST['email']) || isset($_POST['nome2']) && isset($_POST['email2'])) {
 		include("cadastra_lead.php");
 } ?>
 
-<?PHP
+<?php
 
 function getUserIP() {
-    return $_SERVER['REMOTE_ADDR'];
+    // return $_SERVER['REMOTE_ADDR'];
+
+    if (isset($_SERVER['HTTP_CLIENT_IP'])) {
+    	
+        return $_SERVER['HTTP_CLIENT_IP'];
+    } else if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+
+        return $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } else if(isset($_SERVER['HTTP_X_FORWARDED'])) {
+
+        return $_SERVER['HTTP_X_FORWARDED'];
+    } else if(isset($_SERVER['HTTP_FORWARDED_FOR'])) {
+
+        return $_SERVER['HTTP_FORWARDED_FOR'];
+    } else if(isset($_SERVER['HTTP_FORWARDED'])) {
+
+        return $_SERVER['HTTP_FORWARDED'];
+    } else if(isset($_SERVER['REMOTE_ADDR'])) {
+
+        return $_SERVER['REMOTE_ADDR'];
+    } else {
+        return 'UNKNOWN';
+    }
 }
 
 
@@ -17,36 +39,47 @@ $user_ip = getUserIP();
 <html>
 <head>
 	<title>RH 360</title>
+	<link rel="shortcut icon" href="images/faviicon.png" />
 	<meta charset="utf-8" />
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<link rel="stylesheet" href="assets/css/modificacoes.css"/>
-	<!-- Global Site Tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107371054-1"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments)};
-		  gtag('js', new Date());
 
-		  gtag('config', 'UA-107371054-1');
-		</script>
+	<!-- Global Site Tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107371054-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments)};
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-107371054-1');
+	</script>
 </head>
 <body>
 	<!--Banner principal-->
 	<div id="titulo-principal" class="container">
-		<h1 id="titulo-principal">
-			<a href="index.html">
-				<font id="logo">RH</font> 360
-			</a>
-		</h1>
+		<a href="http://rh360.com.br/">
+		<img id="logo" border="0" alt="RH360" src="images\logo-cabecalho.png" class="img-responsive" height="100">
+		</a>
 	</div>
 	<header id="inicial">
 		<div class="container TopCasaFina-bannerWrapper">
 			<div class="TopCasaFina-banner">
-				<h1>Milky Way Tour by Camping on Mount Bromo</h1>
-				<p class="data-postagem">in Travel / 26.12.2016 <p>
-					<a class="btn btn-success" href="#" role="button">read more</a>
+				<h1>Você sabe quais perfis existem dentro da sua empresa ?</h1>
+				<p class="data-postagem">trace o perfil dos seus colaboradores e organize sua equipe de maneira mais acertiva<p>
+				<form method="post"  id="for-banner" class="form-inline">
+				  <div class="form-group">
+				    <label for="exampleInputName2"></label>
+				    <input type="hidden" name="ipaddress" id="ipaddress" value="<?= $user_ip; ?>">
+				    <input type="text" name="nome" class="form-control" id="exampleInputName2" placeholder="Nome Completo" required>
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputEmail2"></label>
+				    <input type="email" class="form-control" id="exampleInputEmail2" name="email" placeholder="E-mail Corporativo" required>
+				  </div>
+					 <button type="submit" class="btn btn-default">Iniciar Teste</button>
+				</form>
 			</div>
 		</div>
 	</header>
@@ -55,25 +88,23 @@ $user_ip = getUserIP();
 	<section id="barra-formulario">
 		<div class="container">	
 			<div id="head" class="row">
-				<div class="col-md-3">
-					<?php if($verify_connection) { echo "cadastrado"; } ?>
-					<p id="p1"> JUNTE-SE A MAIS DE 150.000 PESSOAS</p>
-					<p id="p2"> Entre para nossa lista e receba conteúdos exclusivos e com prioridade</p>
+				<div class="col-md-4">
+					<p id="p2">Somos especialistas no assunto, podemos te ajudar?</p>
+					<p id="p1"> Entre para nossa lista e receba conteúdos exclusivos e com prioridade</p>
 				</div>	
-				<!-- <div class="col-md-1">&nbsp;</div> -->
-				<div class="col-md-9 col-xs-12">					
-					<form method="post"  id="formlead" class="form-inline" accept-charset="UTF-8">
-						<input type="hidden" name="ipaddress" id="ipaddress" value="<?= $user_ip; ?>">
+				<div class="col-md-1">&nbsp;</div>
+				<div class="col-md-7 col-xs-12">					
+					<form method="post" id="formlead" class="form-inline">
 						<div class="form-group">
-							<input type="text" class="form-control" name="nome" id="nome" required placeholder="NOME">
+							<label for="exampleInputName2"></label>
+				    		<input type="hidden" name="ipaddress" id="ipaddress" value="<?= $user_ip; ?>">
+				    		<input type="text" class="form-control" id="exampleInputName2" name="nome2" placeholder="Nome Completo" required>
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" name="sobrenome" id="sobrenome" required placeholder="SOBRENOME">
-						</div>
-						<div class="form-group">
-							<input type="email" class="form-control" name="email" id="email" required placeholder="EMAIL">
+							<label for="exampleInputEmail2"></label>
+				    		<input type="email" class="form-control" id="exampleInputEmail2" name="email2" placeholder="E-mail Corporativo" required>
 						</div>					  
-						<button type="submit" class="btn btn-default">Cadastrar email</button>
+						 <button id="e-mail-barra-secundaria" type="submit" class="btn btn-default">Cadastrar E-mail</button>
 					</form>
 				</div>
 			</div>
@@ -88,29 +119,65 @@ $user_ip = getUserIP();
 			<article class="post">
 				<header>
 					<div class="title">
-						<h2><a href="postagens/postagem1.html">A gestão de pessoas através do perfil comportamental</a></h2>
+						<h2><a href="postagens/postagem1.php">A gestão de pessoas através do perfil comportamental</a></h2>
 						<p>Como melhorar a contratação e reduzir o turnover da sua empresa</p>
 					</div>
 					<div class="meta">
-						<time class="published" datetime="2015-11-01">Outubro 1, 2017</time>
-						<a href="#" class="author"><span class="name">Letícia Pegoraro</span><img src="images/Leticia Pegoraro.jpg" alt="" /></a>
+						<time class="published" datetime="2017-10-01">Outubro 1, 2017</time>
+						<a href="https://www.linkedin.com/in/let%C3%ADcia-pegoraro-07272814a/" target="_blank" class="author"><span class="name">Letícia Pegoraro</span><img src="images/Leticia Pegoraro.jpg" alt="" /></a>
 					</div>
 				</header>
-				<a href="#" class="image featured"><img src="images/post-1-perfil-comportamental.png" alt="" /></a>
+				<a href="postagens/postagem1.php" class="image featured"><img src="images/post-1-perfil-comportamental.png" alt="" /></a>
 				<p>Construir um time de alta performance é o sonho de qualquer organização. Contratar pessoas diferenciadas, baseado em currículo e pequenos testes pode ser um grande desafio e maior ainda é saber se estes profissionais se adaptarão ao ambiente e a equipe. Ter mais informações sobre o perfil do candidato e do time ajudam o RH na hora de contratar e reter bons funcionários.</p>
 				<footer>
 					<ul class="actions">
-						<li><a href="postagens/postagem1.html" class="button big">Continuar lendo</a></li>
-					</ul>
-					<ul class="stats">
-						<li><a href="#">General</a></li>
-						<li><a href="#" class="icon fa-heart">28</a></li>
-						<li><a href="#" class="icon fa-comment">128</a></li>
+						<li><a href="postagens/postagem1.php" class="button big">Continuar lendo</a></li>
 					</ul>
 				</footer>
 			</article>
 
-				<!-- Pagination
+				<!-- Post -->
+			<article class="post">
+				<header>
+					<div class="title">
+						<h2><a href="postagens/postagem2.php">Como aumentar a produtividade com a gestão comportamental</a></h2>
+						<p>O desenvolvimento de equipes se tornou fator chave em um mundo competitivo. Saiba por que a gestão voltada para o comportamento é tão importante</p>
+					</div>
+					<div class="meta">
+						<time class="published" datetime="2017-10-01">Outubro 01, 2017</time>
+						<a href="https://www.linkedin.com/in/let%C3%ADcia-pegoraro-07272814a/" target="_blank" class="author"><span class="name">Letícia Pegoraro</span><img src="images/Leticia Pegoraro.jpg" alt="" /></a>
+					</div>
+				</header>
+				<a href="postagens/postagem2.php" class="image featured"><img src="images/post-2-aumento-produtividade.png" alt="" /></a>
+				<p>Uma das maneiras de aumentar a produtividade em uma empresa é melhorando o capital humano. Isso inclui tanto o desenvolvimento dos atuais colaboradores como contratações mais assertivas - o mau comportamento é uma das principais causas de demissão no nosso país. Organizações com bastante rotatividade perdem tempo e dinheiro.</p>
+				<footer>
+					<ul class="actions">
+						<li><a href="postagens/postagem2.php" class="button big">Continuar lendo</a></li>
+					</ul>
+				</footer>
+			</article>
+
+				<!-- Post -->
+			<article class="post">
+				<header>
+					<div class="title">
+						<h2><a href="postagens/postagem3.php">5 - Argumentos para impactar gestores da importância do software de RH</a></h2>
+						<p>Livre-se das planilhas de Excel! Automatize as tarefas do RH</p>
+					</div>
+					<div class="meta">
+						<time class="published" datetime="2017-10-01">Outubro 01, 2017</time>
+						<a href="https://www.linkedin.com/in/andi-cris-souza-santana-a245aa95/" target="_blank" class="author"><span class="name">Andi Cris Souza</span><img src="images/Andi Cris Souza.jpg" alt="" /></a>
+					</div>
+				</header>
+				<a href="postagens/postagem3.php" class="image featured"><img src="images/post-3-software-rh.png" alt="" /></a>
+				<p>A taxa de desemprego no Brasil atingiu 13,2% no trimestre encerrado em fevereiro, informou o Instituto Brasileiro de Geografia e Estatística dia 31 de março de 2017. Muitos profissionais qualificados estão em busca de recolocação e isso faz com que o mercado fique cada vez mais competitivo. As empresas de RH tem um “mar de candidatos” à disposição e consequentemente muito mais trabalho devido a alta demanda pelas vagas. Apresentar novas soluções e fazer o processo ser mais ágil, é um dos desafios da administração estratégica dos RH’s em todas as empresas independente dos seus portes. A automatização dos processos e a correta exploração do capital humano tornam a empresa mais competitiva, e como gerenciar essa grande quantidade de informações apenas com as suas planilhas?</p>
+				<footer>
+					<ul class="actions">
+						<li><a href="postagens/postagem3.php" class="button big">Continuar lendo</a></li>
+					</ul>
+				</footer>
+			</article>
+				<!-- <!-- Pagination -->
 				<ul class="actions pagination">
 					<li><a href="" class="disabled button big previous">Previous Page</a></li>
 					<li><a href="#" class="button big next">Next Page</a></li>
@@ -123,10 +190,9 @@ $user_ip = getUserIP();
 
 				<!-- Intro -->
 				<section id="intro">
-					<a href="#" class="logo"><img src="images/logo.jpg" alt="" /></a>
 					<header>
-						<h2>Future Imperfect</h2>
-						<p>Another fine responsive site template by <a href="http://html5up.net">HTML5 UP</a></p>
+						<h2>RH ESTRATÉGICO</h2>
+						<p>Desenvolvendo o capital humano para melhorar resultados</p>
 					</header>
 				</section>
 
@@ -137,41 +203,38 @@ $user_ip = getUserIP();
 						<!-- Mini Post -->
 						<article class="mini-post">
 							<header>
-								<h3><a href="postagens/postagem1.html">A GESTÃO DE PESSOAS ATRAVÉS DO PERFIL COMPORTAMENTAL</a></h3>
+								<h3><a href="postagens/postagem1.php">A GESTÃO DE PESSOAS ATRAVÉS DO PERFIL COMPORTAMENTAL</a></h3>
 								<time class="published" datetime="2015-10-20">Outubro 1, 2017</time>
 								<a href="https://www.linkedin.com/in/let%C3%ADcia-pegoraro-07272814a/" target="_blank" class="author"><img src="images/Leticia Pegoraro.jpg" alt="Leticia Pegoraro" /></a>
 							</header>
-							<a href="postagens/postagem1.html" class="image"><img src="images/post-1-perfil-comportamental.png" alt="" /></a>
+							<a href="postagens/postagem1.php" class="image"><img src="images/post-1-perfil-comportamental.png" alt="" /></a>
 						</article>
 
 						<!-- Mini Post -->
 						<article class="mini-post">
 							<header>
-								<h3><a href="postagens/postagem2.html">Como aumentar a produtividade com a gestão comportamental</a></h3>
+								<h3><a href="postagens/postagem2.php">Como aumentar a produtividade com a gestão comportamental</a></h3>
 								<time class="published" datetime="2015-10-20">Outubro 1, 2017</time>
 								<a href="https://www.linkedin.com/in/let%C3%ADcia-pegoraro-07272814a/" target="_blank" class="author"><img src="images/Leticia Pegoraro.jpg" alt="Leticia Pegoraro" /></a>
 							</header>
-							<a href="postagens/postagem2.html" class="image"><img src="images/post-2-aumento-produtividade.png" alt="" /></a>
+							<a href="postagens/postagem2.php" class="image"><img src="images/post-2-aumento-produtividade.png" alt="" /></a>
 						</article>
 
 						<!-- Mini Post -->
 						<article class="mini-post">
 							<header>
-								<h3><a href="postagens/postagem3.html">5 - ARGUMENTOS PARA IMPACTAR GESTORES DA IMPORTÂNCIA DO SOFTWARE DE RH</a></h3>
+								<h3><a href="postagens/postagem3.php">5 - ARGUMENTOS PARA IMPACTAR GESTORES DA IMPORTÂNCIA DO SOFTWARE DE RH</a></h3>
 								<time class="published" datetime="2015-10-20">Outubro 1, 2017</time>
 								<a href="https://www.linkedin.com/in/andi-cris-souza-santana-a245aa95/" target="_blank" class="author"><img src="images/Andi Cris Souza.jpg" alt="" /></a>
 							</header>
-							<a href="postagens/postagem3.html" class="image"><img src="images/post-3-software-rh.png" alt="" /></a>
+							<a href="postagens/postagem3.php" class="image"><img src="images/post-3-software-rh.png" alt="" /></a>
 						</article>
 					</div>
 				</section>
 				<!-- About -->
 				<section class="blurb">
-					<h2>About</h2>
-					<p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.</p>
-					<ul class="actions">
-						<li><a href="#" class="button">Learn More</a></li>
-					</ul>
+					<h2>Sobre</h2>
+					<p>Somos um blog de RH para empresas de todos os portes e segmentos, nosso foco é aumentar sua produtividade formando equipes de alta performance. Nosso diferencial é oferecer ferramentas práticas e gratuitas para melhorar o recrutamento e alocação dos seus colaboradores. Acreditamos que o RH estratégico reduz rotatividade e custos desnecessários com demissões, recontratações e novos treinamentos. Queremos ser seu parceiro nessa tarefa! Cada profissional se encaixa em um perfil e cada um desempenha melhor certas atividades. Em nossa página você encontrará dicas e testes comportamentais que te ajudarão nesse desafio!</p>
 				</section>
 
 				<!-- Footer -->
@@ -184,15 +247,14 @@ $user_ip = getUserIP();
 						<li><a href="#" class="fa-envelope"><span class="label">Email</span></a></li>
 					</ul>
 				</section>
+				</section>
 			</section>
 		</main>
-		
-		<!-- Scripts -->
 	</body>
-	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 </html>
+
 <script>
 	$(document).ready(function() {
-		//waiting for solution
+		//code here
 	});
 </script>
