@@ -45,6 +45,15 @@ $user_ip = getUserIP();
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" href="../assets/css/main.css" />
 	<link rel="stylesheet" href="../assets/css/modificacoes.css"/>
+	<!-- Global Site Tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107371054-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments)};
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-107371054-1');
+	</script>
 </head>
 	<body class="single">
 		<!--Banner principal-->
@@ -62,7 +71,7 @@ $user_ip = getUserIP();
 					  <div class="form-group">
 					    <label for="exampleInputName2"></label>
 					    <input type="hidden" name="ipaddress" id="ipaddress" value="<?= $user_ip; ?>">
-					    <input type="text" name="nome" class="form-control" id="exampleInputName2" placeholder="Nome Completo" required>
+					    <input type="text" name="nome" class="form-control" pattern="[A-Za-zà-úÀ-Ú ']{6,}" title="Digite seu nome completo" id="exampleInputName2" placeholder="Nome Completo" required>
 					  </div>
 					  <div class="form-group">
 					    <label for="exampleInputEmail2"></label>
@@ -88,7 +97,7 @@ $user_ip = getUserIP();
 							<div class="form-group">
 								<label for="exampleInputName2"></label>
 					    		<input type="hidden" name="ipaddress" id="ipaddress" value="<?= $user_ip; ?>">
-					    		<input type="text" class="form-control" id="exampleInputName2" name="nome2" placeholder="Nome Completo" required>
+					    		<input type="text" class="form-control" id="exampleInputName2" name="nome2" pattern="[A-Za-zà-úÀ-Ú ']{6,}" title="Digite seu nome completo" placeholder="Nome Completo" required>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputEmail2"></label>

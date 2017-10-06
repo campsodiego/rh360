@@ -6,29 +6,29 @@
 <?php
 
 function getUserIP() {
-    // return $_SERVER['REMOTE_ADDR'];
+    return $_SERVER['REMOTE_ADDR'];
 
-    if (isset($_SERVER['HTTP_CLIENT_IP'])) {
+    // if (isset($_SERVER['HTTP_CLIENT_IP'])) {
     	
-        return $_SERVER['HTTP_CLIENT_IP'];
-    } else if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    //     return $_SERVER['HTTP_CLIENT_IP'];
+    // } else if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
 
-        return $_SERVER['HTTP_X_FORWARDED_FOR'];
-    } else if(isset($_SERVER['HTTP_X_FORWARDED'])) {
+    //     return $_SERVER['HTTP_X_FORWARDED_FOR'];
+    // } else if(isset($_SERVER['HTTP_X_FORWARDED'])) {
 
-        return $_SERVER['HTTP_X_FORWARDED'];
-    } else if(isset($_SERVER['HTTP_FORWARDED_FOR'])) {
+    //     return $_SERVER['HTTP_X_FORWARDED'];
+    // } else if(isset($_SERVER['HTTP_FORWARDED_FOR'])) {
 
-        return $_SERVER['HTTP_FORWARDED_FOR'];
-    } else if(isset($_SERVER['HTTP_FORWARDED'])) {
+    //     return $_SERVER['HTTP_FORWARDED_FOR'];
+    // } else if(isset($_SERVER['HTTP_FORWARDED'])) {
 
-        return $_SERVER['HTTP_FORWARDED'];
-    } else if(isset($_SERVER['REMOTE_ADDR'])) {
+    //     return $_SERVER['HTTP_FORWARDED'];
+    // } else if(isset($_SERVER['REMOTE_ADDR'])) {
 
-        return $_SERVER['REMOTE_ADDR'];
-    } else {
-        return 'UNKNOWN';
-    }
+    //     return $_SERVER['REMOTE_ADDR'];
+    // } else {
+    //     return 'UNKNOWN';
+    // }
 }
 
 
@@ -72,7 +72,7 @@ $user_ip = getUserIP();
 				  <div class="form-group">
 				    <label for="exampleInputName2"></label>
 				    <input type="hidden" name="ipaddress" id="ipaddress" value="<?= $user_ip; ?>">
-				    <input type="text" name="nome" class="form-control" id="exampleInputName2" placeholder="Nome Completo" required>
+				    <input type="text" name="nome" class="form-control" pattern="[A-Za-zà-úÀ-Ú ']{6,}" title="Digite seu nome completo" id="exampleInputName2" placeholder="Nome Completo" required>
 				  </div>
 				  <div class="form-group">
 				    <label for="exampleInputEmail2"></label>
@@ -98,7 +98,7 @@ $user_ip = getUserIP();
 						<div class="form-group">
 							<label for="exampleInputName2"></label>
 				    		<input type="hidden" name="ipaddress" id="ipaddress" value="<?= $user_ip; ?>">
-				    		<input type="text" class="form-control" id="exampleInputName2" name="nome2" placeholder="Nome Completo" required>
+				    		<input type="text" class="form-control" id="exampleInputName2" pattern="[A-Za-zà-úÀ-Ú ']{6,}" title="Digite seu nome completo" name="nome2" placeholder="Nome Completo" required>
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail2"></label>
